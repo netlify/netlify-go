@@ -181,6 +181,22 @@ func (s *SitesService) List(options *ListOptions) ([]Site, *Response, error) {
 	return *sites, resp, err
 }
 
+// List all sites you have access to in a given team. Takes ListOptions to control pagination.
+func (s *SitesService) TeamList(teamName string, options *ListOptions) ([]Site, *Response, error) {
+	sites := new([]Site)
+
+	reqOptions := &RequestOptions{QueryParams: options.toQueryParamsMap()}
+
+	resp, err := s.client.Request("GET", "/"+teamName+"/sites", reqOptions, sites)
+
+	for _, site := range *sites {
+		site.client = s.client
+		site.Deploys = &DeploysService{client: s.client, site: &site}
+	}
+
+	return *sites, resp, err
+}
+
 func (site *Site) apiPath() string {
 	return path.Join("/sites", site.Id)
 }
