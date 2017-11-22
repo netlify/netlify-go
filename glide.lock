@@ -7,7 +7,7 @@ imports:
   version: 6a1fa9404c0aebf36c879bc50152edcc953910d2
   subpackages:
   - proto
-- name: github.com/sirupsen/logrus
+- name: github.com/Sirupsen/logrus
   version: 202f25545ea4cf9b191ff7f846df5d87c9382c2b
 - name: golang.org/x/net
   version: 570fa1c91359c1869590e9cedf3b53162a51a167
